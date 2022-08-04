@@ -155,3 +155,5 @@ bin/activate.fish
 bin/activate.csh
 bin/activate
 .DS_Store
+bin/easy_install
+bin/easy_install-3.8
