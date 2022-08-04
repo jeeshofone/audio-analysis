@@ -154,3 +154,4 @@ bin/activate.nu
 bin/activate.fish
 bin/activate.csh
 bin/activate
+.DS_Store
