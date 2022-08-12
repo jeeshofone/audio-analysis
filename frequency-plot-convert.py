@@ -37,9 +37,10 @@ df = pd.read_csv(args.file, header=None, names=['frequency', 'amplitude'])
 # create an array of zeros to hold the audio data for the sample_rate
 audio = np.zeros(sample_rate)
 
-# create an array of sample_rate evenly spaced numbers from 0 to sample_rate
+# create an array of sample_rate evenly spaced numbers from 0 to sample_rate multiplied by the end_time
 # this is the time axis
-timedomain = np.linspace(start_time, end_time, sample_rate)
+timedomain = np.linspace(start_time, end_time, end_time * sample_rate)
+#timedomain = np.linspace(start_time, end_time, sample_rate)
 sinewave = np.empty(len(timedomain))
 # create a continuous sine wave for each row in the dataframe of length sample_rate samples
 # the frequency is the frequency in the dataframe
@@ -50,6 +51,8 @@ sinewave = np.empty(len(timedomain))
 # combine all of the sine waves into a single audio file
 for index, row in df.iterrows():
     # combine all the sinewaves into a single sinewave
+    # create a random value for theta that is between negative pi and pi
+    theta = np.random.uniform(-math.pi, math.pi)
     sinewave += row['amplitude'] * np.sin(2 * np.pi * row['frequency'] * timedomain + theta)
     # save each sine wave to its own wav file with the frequency as the file name
     # wav.write(str(row['frequency']) + '.wav', sample_rate, audio) #debug
